@@ -73,11 +73,21 @@ function install_rabbitmq() {
         erlang-mnesia erlang-os-mon erlang-parsetools erlang-public-key \
         erlang-runtime-tools erlang-snmp erlang-ssl \
         erlang-syntax-tools erlang-tftp erlang-tools erlang-xmerl || return 1
-    
+
     # Install RabbitMQ server
     sudo apt-get install rabbitmq-server -y --fix-missing || return 1
 
     success "Installed RabbitMQ and Erlang"
+}
+
+function enable_management_plugin() {
+    if program_exists rabbitmq-plugins; then
+        rabbitmq-plugins enable rabbitmq_management || return 1
+        sudo rabbitmqctl enable_feature_flag all || return 1
+        success "Enabled RabbitMQ management plugin"
+    else
+        error "Command not found: rabbitmq-plugins"
+    fi
 }
 
 function set_rabbitmq_users() {
@@ -86,7 +96,7 @@ function set_rabbitmq_users() {
             rabbitmqctl delete_user guest >/dev/null && \
             success "Deleted user [guest]"
         rabbitmqctl list_users | grep -q admin || {
-            rabbitmqctl add_user admin $ADMIN_PWD >/dev/null && \
+            rabbitmqctl add_user admin $PASSWORD >/dev/null && \
             rabbitmqctl set_user_tags admin administrator >/dev/null && \
             rabbitmqctl set_permissions -p / admin ".*" ".*" ".*" >/dev/null && \
             success "Added user [admin]"
@@ -114,7 +124,7 @@ function print_usage() {
 }
 
 # read options
-TEMP=`getopt -o hiuec:j:n: --long help,install,update,erase,cookie: -n $(basename "$0") -- "$@"`
+TEMP=`getopt -o hiuec:p: --long help,install,update,erase,cookie:,ip: -n $(basename "$0") -- "$@"`
 eval set -- "$TEMP"
 
 # extract options and arguments
@@ -137,6 +147,7 @@ case $ACTION in
         add_repository_keys
         add_repository
         install_rabbitmq
+        enable_management_plugin
         restart_rabbitmq
         set_rabbitmq_users
         ;;
