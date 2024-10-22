@@ -1,6 +1,6 @@
 services:
   rabbitmq-node1:
-    build: .
+    image: rabbitmq:3-management
     hostname: rabbitmq-node1
     container_name: rabbitmq-node1
     environment:
@@ -17,7 +17,7 @@ services:
       - rabbitmq_cluster
 
   rabbitmq-node2:
-    build: .
+    image: rabbitmq:3-management
     hostname: rabbitmq-node2
     container_name: rabbitmq-node2
     environment:
@@ -33,7 +33,7 @@ services:
       - rabbitmq-node1
 
   rabbitmq-node3:
-    build: .
+    image: rabbitmq:3-management
     hostname: rabbitmq-node3
     container_name: rabbitmq-node3
     environment:
