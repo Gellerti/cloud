@@ -2,10 +2,15 @@
 Этот проект содержит Docker Compose файл и Dockerfile для создания и запуска контейнера с RabbitMQ на базе Ubuntu 20.04. Проект также включает скрипты для автоматической установки и настройки RabbitMQ
 
 Установка
+
 Клонируйте репозиторий:
+
 git clone [https://github.com/cloud.git](https://github.com/Gellerti/cloud.git).git
+
 cd ваш_репозиторий
+
 Соберите Docker образ:
+
 docker-compose build
 
 Запуск
@@ -15,7 +20,9 @@ docker-compose up -d
 
 RabbitMQ будет доступен по следующим портам:
 5672: Порт для подключения к RabbitMQ.
+
 15672: Порт для доступа к веб-интерфейсу управления RabbitMQ.
+
 Вы можете получить доступ к веб-интерфейсу управления RabbitMQ по адресу http://IP:15672.
 
 
