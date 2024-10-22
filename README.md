@@ -19,6 +19,7 @@ docker-compose build
 docker-compose up -d
 
 RabbitMQ будет доступен по следующим портам:
+
 5672: Порт для подключения к RabbitMQ.
 
 15672: Порт для доступа к веб-интерфейсу управления RabbitMQ.
