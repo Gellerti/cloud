@@ -5,7 +5,7 @@
 
 Клонируйте репозиторий:
 
-git clone [https://github.com/cloud.git](https://github.com/Gellerti/cloud.git).git
+git clone [https://github.com/cloud.git](https://github.com/Gellerti/cloud.git)
 
 cd ваш_репозиторий
 
