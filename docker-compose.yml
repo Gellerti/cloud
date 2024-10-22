@@ -11,7 +11,7 @@ services:
     volumes:
       - rabbitmq_data_node1:/var/lib/rabbitmq
     ports:
-      - "15672:15672"  
+      - "15672:15672" 
       - "5672:5672"    
     networks:
       - rabbitmq_cluster
@@ -27,6 +27,7 @@ services:
       - RABBITMQ_NODENAME=rabbit@rabbitmq-node2
     volumes:
       - rabbitmq_data_node2:/var/lib/rabbitmq
+      - ./join_cluster.sh:/docker-entrypoint-init.d/join_cluster.sh
     networks:
       - rabbitmq_cluster
     depends_on:
@@ -43,6 +44,7 @@ services:
       - RABBITMQ_NODENAME=rabbit@rabbitmq-node3
     volumes:
       - rabbitmq_data_node3:/var/lib/rabbitmq
+      - ./join_cluster.sh:/docker-entrypoint-init.d/join_cluster.sh
     networks:
       - rabbitmq_cluster
     depends_on:
