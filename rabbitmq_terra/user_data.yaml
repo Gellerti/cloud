@@ -35,7 +35,7 @@ runcmd:
   - cd /opt/rabbitmq
   - git clone https://github.com/Gellerti/cloud.git .
   - chmod -R 777 /opt/rabbitmq
-  - echo 'export PASSWORD=12345' | tee -a /etc/profile
+  - echo 'export PASSWORD=Password' | tee -a /etc/profile
   - source /etc/profile
   - ./opt/rabbitmq/install_rabbitmq.sh -i
 
