@@ -1,0 +1,33 @@
+ulimitNofiles: ""
+
+clustering:
+  enabled: true
+
+replicaCount: 3
+
+auth:
+  username: admin
+  password: "password"
+  erlangCookie: "WGVEXAMPLEERLANG"
+
+extraConfiguration: |-
+  log.file.level = warning
+  vm_memory_high_watermark.relative = 0.7
+  disk_free_limit.relative = 1.0
+  collect_statistics_interval = 10000
+
+resources:
+  limits:
+    memory: 1Gi
+  requests:
+    cpu: 100m
+    memory: 1Gi
+
+persistence:
+  enabled: true
+  existingClaim: "nfs-rabbitmq-pvc"
+  size: 5Gi
+
+
+service:
+  type: LoadBalancer
